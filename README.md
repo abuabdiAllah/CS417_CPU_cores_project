@@ -78,19 +78,6 @@ The program outputs:
 2. **Time segments** with slope and intercept for each adjacent pair of temperature readings
 3. **Mathematical format** y = b + mx where b is intercept and m is slope
 
-## Project Structure
-
-
-CS417_project_part1/
-      src/main/java/
-        ParseTempsDriver.java                    
-        edu/odu/cs/cs417/
-            TemperatureParser.java               
-            PiecewiseInterpolator.java          
-            package-info.java
-      sample_input.txt                             
-      build.gradle                                 
-      README.md                                    
 
 
 ## Mathematical Background
