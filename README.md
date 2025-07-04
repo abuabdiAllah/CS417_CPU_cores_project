@@ -1,4 +1,4 @@
-# CS417 Project Part 2 - Temperature Parser with Piecewise Linear Interpolation
+# CS417 Project Part 2 - Temparature Parser with Piecewise Linear Interpolation
 
 A Java application for parsing CPU core temperature data from input files and computing piecewise linear interpolation between adjacent temperature readings.
 
