@@ -10,23 +10,17 @@ This project requires:
 
 ## Compilation Instructions
 
-### Using Gradle (Recommended)
+### Use Gradle 
 
 **On Linux/macOS or Git Bash (Windows):**
-```bash
-# Build the project
-./gradlew build
-```
 
-### Using Java Compiler directly
-```bash
-# Compile all Java files
-javac -cp "src/main/java" src/main/java/*.java src/main/java/edu/odu/cs/cs417/*.java
-```
+./gradlew build
+
+
 
 ## How to Run Your Program
 
-### Using Gradle (Recommended)
+### Use Gradle
 
 **On Linux servers or Git Bash (Windows):**
 ```bash
@@ -37,19 +31,11 @@ javac -cp "src/main/java" src/main/java/*.java src/main/java/edu/odu/cs/cs417/*.
 ./gradlew run --args="your_input_file.txt"
 ```
 
-### Using Java directly
-```bash
-# Run the compiled classes
-java -cp "src/main/java" ParseTempsDriver sample_input.txt
-
-# Or run the JAR file (after building)
-java -jar build/libs/ParseTemps.jar sample_input.txt
-```
 
 ### Platform Compatibility
 This project is compatible with **Linux servers** and **Git Bash on Windows**. 
 
-**Note:** Windows PowerShell has been known to cause issues with the Gradle wrapper commands.
+**Note:** Windows PowerShell caused me a lot of issues with the Gradle wrapper commands and I don't recommend it
 
 ## Sample Output
 
