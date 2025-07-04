@@ -63,7 +63,7 @@ public class ParseTempsDriver {
                 coreReadings[coreIdx][lineIdx] = allTheTemps.get(lineIdx).readings[coreIdx];
             }
         }
-
+        // no printing parsed data for part 2
         // //----------------------------------------------------------------------
         // // Output times alongside each core
         // //----------------------------------------------------------------------

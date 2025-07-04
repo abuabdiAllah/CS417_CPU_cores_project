@@ -1,6 +1,6 @@
-# CS417 Project Part 1 - Temperature Parser
+# CS417 Project Part 2 - Temperature Parser with Piecewise Linear Interpolation
 
-A Java application for parsing CPU core temperature data from input files.
+A Java application for parsing CPU core temperature data from input files and computing piecewise linear interpolation between adjacent temperature readings.
 
 ## Required Libraries
 
@@ -60,46 +60,39 @@ This project is compatible with **Linux servers** and **Git Bash on Windows**.
 62.0 63.0 52.0 60.0
 ```
 
-### Program Output
+### Example Program Output
 ```
-(0, [61.0, 63.0, 50.0, 58.0])
-(30, [80.0, 81.0, 68.0, 77.0])
-(60, [62.0, 63.0, 52.0, 60.0])
-...
-
+Piecewise Linear Interpolation Results (see):
+=====================================
 Core #  0
-       0 -> 61.00
-      30 -> 80.00
-      60 -> 62.00
-      90 -> 83.00
-     120 -> 68.00
-     ...
+       0 <= x <=       30 ; y =      61.0000 +       0.6333 x ; interpolation
+      30 <= x <=       60 ; y =      98.0000 +      -0.6000 x ; interpolation
+      60 <= x <=       90 ; y =      20.0000 +       0.7000 x ; interpolation
+      90 <= x <=      120 ; y =     128.0000 +      -0.5000 x ; interpolation
 
-Core #  1
-       0 -> 63.00
-      30 -> 81.00
-      60 -> 63.00
-      90 -> 82.00
-     120 -> 69.00
-     ...
 
-Core #  2
-       0 -> 50.00
-      30 -> 68.00
-      60 -> 52.00
-      90 -> 70.00
-     120 -> 58.00
-     ...
-
-Core #  3
-       0 -> 58.00
-      30 -> 77.00
-      60 -> 60.00
-      90 -> 79.00
-     120 -> 65.00
-     ...
 ```
 
 The program outputs:
-1. **Parsed readings** showing time step and temperature values for all cores
-2. **Core-by-core breakdown** displaying temperature readings for each CPU core over time
+1. **Piecewise linear interpolation** showing line of best fit equations for each core
+2. **Time segments** with slope and intercept for each adjacent pair of temperature readings
+3. **Mathematical format** y = b + mx where b is intercept and m is slope
+
+## Project Structure
+
+
+CS417_project_part1/
+      src/main/java/
+        ParseTempsDriver.java                    
+        edu/odu/cs/cs417/
+            TemperatureParser.java               
+            PiecewiseInterpolator.java          
+            package-info.java
+      sample_input.txt                             
+      build.gradle                                 
+      README.md                                    
+
+
+## Mathematical Background
+
+The piecewise linear interpolation uses least squares approximation to compute lines of best fit between adjacent temperature readings. read the part 2 intructions of the project and also https://www.cs.odu.edu/~tkennedy/cs417/latest/Public/approximationWhirlwindIntroduction/index.html
