@@ -81,8 +81,7 @@ public class ParseTempsDriver {
         //----------------------------------------------------------------------
         // Piecewise Linear Interpolation
         //----------------------------------------------------------------------
-        System.out.println("Piecewise Linear Interpolation Results:");
-        System.out.println("=====================================");
         computeInterpolation(times, coreReadings);
+        System.out.println("Interpolation results written to separate files (core0.txt, core1.txt, core2.txt, core3.txt)");
     }
 }
