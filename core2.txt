@@ -1,0 +1,5 @@
+       0 <= x <=       30 ; y =      50.0000 +       0.6000 x ; interpolation
+      30 <= x <=       60 ; y =      84.0000 +      -0.5333 x ; interpolation
+      60 <= x <=       90 ; y =      16.0000 +       0.6000 x ; interpolation
+      90 <= x <=      120 ; y =     106.0000 +      -0.4000 x ; interpolation
+       0 <= x <=      120 ; y =      56.0000 +       0.0600 x ; least-squares
