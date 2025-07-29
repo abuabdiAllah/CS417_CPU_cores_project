@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 
 import static edu.odu.cs.cs417.TemperatureParser.CoreTempReading;
 import static edu.odu.cs.cs417.TemperatureParser.parseRawTemps;
+import static edu.odu.cs.cs417.PiecewiseInterpolator.computeInterpolation;
 
 /**
  * A simple command line test driver for TemperatureParser.
@@ -43,9 +44,9 @@ public class ParseTempsDriver {
 
         List<CoreTempReading> allTheTemps = parseRawTemps(tFileStream);
 
-        for (CoreTempReading aReading : allTheTemps) {
-            System.out.println(aReading);
-        }
+        // for (CoreTempReading aReading : allTheTemps) {
+        //     System.out.println(aReading);
+        // }
 
         //----------------------------------------------------------------------
         // Split into separate arrays
@@ -62,19 +63,26 @@ public class ParseTempsDriver {
                 coreReadings[coreIdx][lineIdx] = allTheTemps.get(lineIdx).readings[coreIdx];
             }
         }
+        // no printing parsed data for part 2
+        // //----------------------------------------------------------------------
+        // // Output times alongside each core
+        // //----------------------------------------------------------------------
+        // System.out.println();
+        // for (int coreIdx = 0; coreIdx < numberOfCores; ++coreIdx) {
+        //     System.out.printf("Core # %2d%n", coreIdx);
+
+        //     for (int i = 0; i < times.length; ++i) {
+        //     System.out.printf("%8d -> %5.2f%n", times[i], coreReadings[coreIdx][i]);
+        //     }
+
+        //     System.out.println();
+        // }
 
         //----------------------------------------------------------------------
-        // Output times alongside each core
+        // Piecewise Linear Interpolation
         //----------------------------------------------------------------------
-        System.out.println();
-        for (int coreIdx = 0; coreIdx < numberOfCores; ++coreIdx) {
-            System.out.printf("Core # %2d%n", coreIdx);
-
-            for (int i = 0; i < times.length; ++i) {
-                System.out.printf("%8d -> %5.2f%n", times[i], coreReadings[coreIdx][i]);
-            }
-
-            System.out.println();
-        }
+        System.out.println("Piecewise Linear Interpolation Results:");
+        System.out.println("=====================================");
+        computeInterpolation(times, coreReadings);
     }
 }
