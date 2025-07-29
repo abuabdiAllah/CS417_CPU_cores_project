@@ -1,6 +1,9 @@
-# CS417 Project Part 3 - Temperature Parser with Piecewise Linear Interpolation and Global Linear Least Squares Approximation
+# CS417 Project Part 3 - Temperature Parser with Piecewise Linear Interpolation, Global Linear Least Squares Approximation, and Cubic Spline Interpolation
 
-This is a Java application for parsing CPU core temperature data from input files and computing both piecewise linear interpolation between adjacent temperature readings and global linear least squares approximation across all data points.
+This is a Java application for parsing CPU core temperature data from input files and computing three types of interpolation:
+1. Piecewise linear interpolation between adjacent temperature readings
+2. Global linear least squares approximation across all data points
+3. Cubic spline interpolation for smooth curve fitting
 
 ## Required Libraries
 
@@ -95,20 +98,26 @@ Core 3: y = 64.6000 + 0.0533 * x
       60 <= x <=       90 ; y =      20.0000 +       0.7000 x ; interpolation
       90 <= x <=      120 ; y =     128.0000 +      -0.5000 x ; interpolation
        0 <= x <=      120 ; y =      67.4000 +       0.0567 x ; least-squares
+       0 <= x <=       30 ; y =      61.0000 +       0.6333 x +       0.0000 x^2 +       0.0000 x^3 ; cubic-spline
+      30 <= x <=       60 ; y =      80.0000 +      -0.6000 x +       0.0000 x^2 +       0.0000 x^3 ; cubic-spline
+      60 <= x <=       90 ; y =      62.0000 +       0.7000 x +       0.0000 x^2 +       0.0000 x^3 ; cubic-spline
+      90 <= x <=      120 ; y =      83.0000 +      -0.5000 x +       0.0000 x^2 +       0.0000 x^3 ; cubic-spline
 ```
 
 The program outputs:
 1. **Piecewise linear interpolation** showing line of best fit equations for each core between adjacent points
 2. **Global linear least squares approximation** showing the best-fit line across all data points for each core
-3. **Time segments** with slope and intercept for each adjacent pair of temperature readings
-4. **Mathematical format** y = b + mx where b is intercept and m is slope
+3. **Cubic spline interpolation** showing smooth cubic polynomial segments with continuous first and second derivatives
+4. **Time segments** with slope and intercept for each adjacent pair of temperature readings
+5. **Mathematical format** y = b + mx for linear methods and y = a + bx + cx² + dx³ for cubic splines
 
 ## Project Structure
 
 - `TemperatureParser.java` - Parses temperature data from input files
 - `PiecewiseInterpolator.java` - Computes piecewise linear interpolation
-- `GlobalLeastSquares.java` - Implements global linear least squares approximation using normal equations
+- `GlobalLeastSquares.java` - Implements global linear least squares approximation and cubic spline interpolation
 - `GlobalLeastSquaresDriver.java` - Main driver program demonstrating the functionality
+- `CubicSplineInterpolator.java` - Standalone cubic spline interpolation implementation
 
 ## Mathematical Background
 
@@ -124,5 +133,17 @@ The global least squares approximation uses the normal equations method (X^T * X
 4. **Provides a single equation** that best represents the overall trend
 
 The implementation is done from scratch without using external linear algebra libraries, demonstrating the mathematical principles behind least squares approximation.
+
+### Cubic Spline Interpolation
+The cubic spline interpolation creates smooth piecewise cubic polynomials that:
+1. **Pass through all data points** exactly
+2. **Have continuous first and second derivatives** at interior points
+3. **Use natural boundary conditions** (second derivative = 0 at endpoints)
+
+The implementation:
+1. **Solves a tridiagonal system** using the Thomas algorithm to find second derivatives
+2. **Constructs cubic polynomials** between each pair of points
+3. **Ensures smooth transitions** between segments
+4. **Provides better curve fitting** than linear interpolation for smooth data
 
 For more details, read the part 3 instructions of the project and also https://www.cs.odu.edu/~tkennedy/cs417/latest/Public/approximationWhirlwindIntroduction/index.html
