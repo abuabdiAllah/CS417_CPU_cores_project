@@ -7,10 +7,8 @@ import java.io.IOException;
 
 /**
  * This class implements Global Linear Least Squares Approximation
- * using the normal equations method (X^T * X | X^T * Y).
+ * using the normal equations method (X^T * X | X^T * Y) from class.
  * 
- * For each CPU core, we find the best-fit line y = mx + b that minimizes
- * the sum of squared residuals across all data points.
  */
 public class GlobalLeastSquares {
     
@@ -61,7 +59,7 @@ public class GlobalLeastSquares {
                              (int)x1, (int)x2, intercept, slope);
             }
             
-            // Now compute global least squares for entire range
+            // Now compute global least squares for range
             int n = times.length;
             
             // Compute sums needed for normal equations
@@ -80,7 +78,7 @@ public class GlobalLeastSquares {
             // Solve normal equations: [n   sumX] [b] = [sumY]
             //                        [sumX sumX2] [m]   [sumXY]
             
-            // Using Cramer's rule to solve the 2x2 system
+            // solve the 2x2 system
             double det = n * sumX2 - sumX * sumX;
             
             if (Math.abs(det) < 1e-10) {
@@ -102,8 +100,7 @@ public class GlobalLeastSquares {
     }
     
     /**
-     * Alternative implementation using matrix operations (for educational purposes).
-     * This shows how the normal equations would be solved using matrix operations.
+     * solve matrix operations
      * 
      * @param times Array of time steps
      * @param coreTemps Array of temperature readings for this core
@@ -155,7 +152,7 @@ public class GlobalLeastSquares {
             throw new ArithmeticException("Matrix is singular");
         }
         
-        // Using Cramer's rule for 2x2 system
+        // Using Cramer's rule i think
         double x = (b[0] * A[1][1] - A[0][1] * b[1]) / det;
         double y = (A[0][0] * b[1] - b[0] * A[1][0]) / det;
         
