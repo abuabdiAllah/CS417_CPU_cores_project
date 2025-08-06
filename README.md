@@ -1,4 +1,4 @@
-# CS417 Project Part 3 (plus extraa credit attempt)- Temperature Parser with Piecewise Linear Interpolation, Global Linear Least Squares Approximation, and Cubic Spline Interpolation
+# CS417 Project (plus Extra Credit)- Temperature Parser with Piecewise Linear Interpolation, Global Linear Least Squares Approximation, and Cubic Spline Interpolation
 
 This is a Java application for parsing CPU core temperature data from input files and computing three types of interpolation:
 1. Piecewise linear interpolation between adjacent temperature readings
@@ -48,7 +48,7 @@ java -cp src/main/java GlobalLeastSquaresDriver
 ### Platform Compatibility
 This project is compatible with **Linux servers** and **Git Bash on Windows**. 
 
-**Note:** Windows PowerShell caused me a lot of issues with the Gradle wrapper commands and I don't recommend it
+**Note:** Windows PowerShell caused a lot of issues with the Gradle wrapper commands, and I don't recommend it (just like most Microsoft software, harsh but true).
 
 ## Sample Output
 
@@ -113,4 +113,4 @@ The program outputs in txt files:
 
 
 
-For more details, read the part 3 instructions of the project and also https://www.cs.odu.edu/~tkennedy/cs417/latest/Public/approximationWhirlwindIntroduction/index.html
+For more details, read the instructions of the project in canvas and also https://www.cs.odu.edu/~tkennedy/cs417/latest/Public/approximationWhirlwindIntroduction/index.html
