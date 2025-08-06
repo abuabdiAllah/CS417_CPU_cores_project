@@ -43,7 +43,14 @@ public class GlobalLeastSquares {
         String filename = "core" + coreIdx + ".txt";
         
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+            // Write header
+            writer.println("CPU Core " + coreIdx + " Temperature Interpolation Results");
+            writer.println("=" .repeat(50));
+            writer.println();
+            
             // First, write piecewise interpolation (same as PiecewiseInterpolator)
+            writer.println("1. PIECEWISE LINEAR INTERPOLATION");
+            writer.println("-" .repeat(30));
             for (int i = 0; i < times.length - 1; ++i) {
                 double x1 = times[i];
                 double y1 = coreTemps[i]; 
@@ -55,11 +62,15 @@ public class GlobalLeastSquares {
                 double intercept = y1 - slope * x1;
                 
                 // Format output for piecewise interpolation
-                writer.printf("%8d <= x <= %8d ; y = %12.4f + %12.4f x ; interpolation%n", 
+                writer.printf("%3d <= x <= %3d ; y = %8.4f + %8.4f x ; interpolation%n", 
                              (int)x1, (int)x2, intercept, slope);
             }
             
+            writer.println();
+            
             // Now compute global least squares for range
+            writer.println("2. GLOBAL LINEAR LEAST SQUARES APPROXIMATION");
+            writer.println("-" .repeat(40));
             int n = times.length;
             
             // Compute sums needed for normal equations
@@ -91,10 +102,13 @@ public class GlobalLeastSquares {
             double slope = (n * sumXY - sumX * sumY) / det;
             
             // Write global least squares result
-            writer.printf("%8d <= x <= %8d ; y = %12.4f + %12.4f x ; least-squares%n", 
+            writer.printf("%3d <= x <= %3d ; y = %8.4f + %8.4f x ; least-squares%n", 
                          times[0], times[n-1], intercept, slope);
+            writer.println();
             
             // Now compute and write cubic spline interpolation
+            writer.println("3. CUBIC SPLINE INTERPOLATION");
+            writer.println("-" .repeat(30));
             if (n >= 2) {
                 double[] secondDerivatives = computeCubicSplineCoefficients(times, coreTemps);
                 writeCubicSplineSegments(writer, times, coreTemps, secondDerivatives);
@@ -293,9 +307,8 @@ public class GlobalLeastSquares {
             double C = c - 3 * d * x1;
             double D = d;
             
-            // Format output for cubic spline
-            writer.printf("%8d <= x <= %8d ; y = %12.4f + %12.4f x + %12.4f x^2 + %12.4f x^3 ; cubic-spline%n", 
-                         (int)x1, (int)x2, A, B, C, D);
+            // Format output for cubic spline (compact, 3 decimals, one space between terms)
+            writer.printf("%d<=x<=%d: y = %.3f %+.3f x %+.3f x^2 %+.3f x^3\n", (int)x1, (int)x2, A, B, C, D);
         }
     }
 } 

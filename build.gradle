@@ -44,12 +44,12 @@ jar {
 }
 
 run {
-    mainClass = "ParseTempsDriver"
+    mainClass = "GlobalLeastSquaresDriver"
     args = ["sample_input.txt"]
 }
 
 application {
-    mainClass = "ParseTempsDriver"
+    mainClass = "GlobalLeastSquaresDriver"
     applicationDefaultJvmArgs = [] 
 }
 // Apply common settings for both test (unit test) and integration test tasks
